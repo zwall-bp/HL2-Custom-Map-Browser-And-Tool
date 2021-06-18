@@ -23,6 +23,7 @@
 For those who have played a good amount of custom Half-Life 2 maps, you may understand that most level designers have you enter their map through means of the console. While this is the standard, it isn't a user-friendly approach. Some other people try to solve the issue by instead turning their map packs into mods. But, if the player wants to swap to a different map, not made by the developer, they would need to leave the game. That's where this tool comes in to help solve that problem.
 
 Using the power of Source's [Bonus Map](https://developer.valvesoftware.com/wiki/Bonus_Maps) feature, we now have a means of sorting all of our installed custom maps in a single place!
+
 <img src="./assets/Markdown/custom_browser.png" alt="Example of the custom map browser">
 
 With this browser, level designer are able to:
@@ -51,6 +52,7 @@ Adding the map browser to your own game is extremely easy and unintrusive. Simpl
 
 And you're done.<br/>
 Next time you boot up your game you will see a new menu option:
+
 <img src="./assets/Markdown/hl2_menu.png" alt="Half-Life 2 Ep 2 menu with the custom maps option">
 
 > **WARNING:** For users playing in a language other than English, you will be missing localization! To fix this, check out `./custom-map-explorer/resource/gameui_english.txt` to see what keyvals you will need to change for your own language.
