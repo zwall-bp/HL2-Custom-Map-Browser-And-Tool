@@ -1,0 +1,5 @@
+The Process of Creating A Bonus Map
+  -BP
+
+When it comes to extra maps, the Source engine houses a feature to allow players to browse and play "Bonus Maps."
+The original purpose for this feature can be seen in Portal
