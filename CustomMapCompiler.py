@@ -222,6 +222,7 @@ if __name__ == "__main__":
             #Check to see if there is an image path.
             if(args.image):
                 #Auto set the image keyval just in case.
+                pMap.setThumnail(args.image)
                 pMap.loadPILImage(args.image)
             pMap.setLocked(args.lock)
         except ... as problem:
