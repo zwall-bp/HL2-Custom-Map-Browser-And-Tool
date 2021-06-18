@@ -72,7 +72,8 @@ def ExportPack(pPack: GamePack, EXPORT_DIR: str = "./exports"):
     #Get the path for where we will be exporting.
     strAddonName = GetCleanName(pPack.getName())
     strPath = EXPORT_DIR + "/" + strAddonName
-    strPathPack = strPath + "/maps/" + strAddonName
+    strPathMap = strPath + "/maps/"
+    strPathPack = strPathMap + strAddonName
     pPath = Path(strPath)
     pPathPack = Path(strPathPack)
 
@@ -90,7 +91,7 @@ def ExportPack(pPack: GamePack, EXPORT_DIR: str = "./exports"):
     #Go over each instance, and do the same thing we see in a normal map export.
     for pMap in pPack.getMaps():
         #Map File. (.bsp)
-        copy(pMap.getMap(), strPathPack)
+        copy(pMap.getMap(), strPathMap)
 
         #Thumbnail File (.tga) (Optional)
         if pMap.hasImage():

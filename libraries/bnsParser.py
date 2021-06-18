@@ -118,14 +118,9 @@ def loadMapDir(strFileName, PATH, ROOT):
     Returns the map file back to its original path.
 
     strFileName: Path to the file.
-    bInPack: Different standard if the map is in a map pack
 """
-def saveMapDir(strFileName: str, bInPack: bool):
+def saveMapDir(strFileName: str):
     strMapName = strFileName[strFileName.rfind("/") + 1:]
-    #Check to see if it's in a subdirectory.
-    if bInPack:
-        #In a subdir, change it to be relative to BNS file.
-        strMapName = "./" + strMapName
 
     #Now, remove the .bsp extention.
     strMapName = strMapName[:strMapName.find(".bsp")]
@@ -186,7 +181,7 @@ def save(dictData, pFile):
             if key == "image":
                 val = saveImageDir(val, bInPack)
             elif key == "map":
-                val = saveMapDir(val, bInPack)
+                val = saveMapDir(val)
             pFile.write(f"\t\"{key}\"\t\"{val}\"\n")
 
         pFile.write("}\n")
