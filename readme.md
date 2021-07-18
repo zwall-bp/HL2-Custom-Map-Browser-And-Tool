@@ -92,6 +92,11 @@ Alright, now for the fun part. Level designers, you wanna use this tool to spice
 
 To get started, this tool hasn't been *frozen* yet, so **you will need to install [Python](https://www.python.org/downloads/)** in order to run the program. Python was chosen as I am on a Linux, and would like for this tool to be as portable as possible.
 
+> WARNING: You will need to install PIL in order to run the program. To install this Python Package, simply:
+```bash
+python -m pip install pillow
+```
+
 To check out all arguments available, open a terminal in this directory and run the command:
 ```bash
 python ./CustomMapCompiler.py --help
