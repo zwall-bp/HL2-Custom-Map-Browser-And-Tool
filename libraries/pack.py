@@ -14,18 +14,25 @@ from libraries import bnsParser
 class GamePack(BonusInstance):
 
     def __init__(self, dictFolderInfo = {}):
-        super().__init__(dictFolderInfo)
         self.rMaps = [] #GameMap Instances.
+        #See if this save instance has map data as well.
+        dictMaps = dictFolderInfo.pop("maps", None)
+        if dictMaps:
+            self.importMaps(dictMaps)
+        super().__init__(dictFolderInfo)
 
     """
         Override of compiling to remove the image tag.
     """
     def compileInstance(self):
         #Get the dictionary of compiling the folderinfo.
-        dictPreComp = super().compileInstance()
-        #Now remove the key "image".
-        dictPreComp.pop("image", None)
-        return dictPreComp
+        dictOutput = super().compileInstance()
+        dictOutput["maps"] = self.compileMaps()
+
+        #Remove the thumbnail path, it does not work for packs.
+        dictOutput.pop("image", None)
+
+        return dictOutput
 
     def compileMaps(self):
         #Create the dictionary we will return.
@@ -69,6 +76,13 @@ class GamePack(BonusInstance):
         """
         for map, keyvals in dictMaps.items():
             self.addMap(GameMap({map: keyvals}, True))
+
+    """
+        Clears all in rMaps
+    """
+    def clearMaps(self):
+        self.rMaps.clear()
+        return
 
     """
         Prints the data about all maps within this pack.

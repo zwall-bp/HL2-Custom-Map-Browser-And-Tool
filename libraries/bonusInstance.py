@@ -9,7 +9,7 @@ Used for both a Map instance and Pack instance.
 """
 
 from PIL import Image
-from math import floor
+from math import floor, ceil
 from libraries import bnsParser
 
 class BonusInstance():
@@ -49,6 +49,10 @@ class BonusInstance():
 
         Turn all of this instance's data into a dictionary.
         """
+        #Check to see if we can export.
+        if not self.validateExport():
+            #Can't export!
+            return
         #Create a dictionary which will hold all of the keyvals.
         dictKeyvals = {}
         #Iterate over all of the dictData putting all inside of the keyvals.
@@ -59,6 +63,12 @@ class BonusInstance():
             dictKeyvals[key] = val
         #Now return a dictionary with the key being the name of the map.
         return {self.getName(): dictKeyvals}
+
+    """
+    Checks to see if the instance has a name, in order to export correctly.
+    """
+    def validateExport(self):
+        return bool(self.getName())
 
     """
     Saves a TGA file of pImage.
@@ -83,16 +93,15 @@ class BonusInstance():
                 #Width is smaller, clamp to that.
                 flScale = 180 / nWidth
                 nWidth = 180
-                nHeight = floor(nHeight * flScale)
+                nHeight = max(ceil(nHeight * flScale), 100)
             else:
                 #Height is smaller, clamp to that.
-                #Width is smaller, clamp to that.
                 flScale = 100 / nHeight
                 nHeight = 100
-                nWidth = floor(nWidth * flScale)
+                nWidth = max(ceil(nWidth * flScale), 180)
             #Now scale down the image to the new width/height.
             #Move the resized to the current image.
-            pResized = self.pImage.resize((nWidth, nHeight))
+            pResized = self.pImage.resize((nWidth, nHeight), Image.LANCZOS)
             self.pImage.close()
             self.pImage = pResized
             #Crop out all of the fat.
@@ -114,7 +123,7 @@ class BonusInstance():
             self.bThumbnailed = True
 
             #Complete this by setting the thumbnail value to this path.
-            self.setThumnail(strPath)
+            self.setThumbnail(strPath)
             return
 
     """
@@ -146,6 +155,9 @@ class BonusInstance():
         #Load in the new image.
         self.pImage = pImage
         self.bUsePIL = True
+        #Clear Thumbnail
+        if self.bThumbnailed:
+            self.bThumbnailed = False
 
     """
     Disables the use of the PIL image.
@@ -184,8 +196,21 @@ class BonusInstance():
         else:
             self.setData("lock", "0")
 
-    def setThumnail(self, strImageDir):
+    def setThumbnail(self, strImageDir):
         self.setData("image", strImageDir)
+
+    def setThumbnailXOffset(self, X: int):
+        self.setData("imageX", X)
+
+    def setThumbnailYOffset(self, Y: int):
+        self.setData("imageY", Y)
+
+    def setThumbnailOffset(self, X: int, Y: int):
+        self.setData("imageX", X)
+        self.setData("imageY", Y)
+
+    def setThumbnailScale(self, flScale: float):
+        self.setData("imageScale", round(flScale, 3))
 
     def getName(self):
         return self.getData("name")
@@ -201,6 +226,18 @@ class BonusInstance():
 
     def getThumbnail(self):
         return self.getData("image")
+
+    def getThumbnailXOffset(self):
+        return self.getData("imageX")
+
+    def getThumbnailYOffset(self):
+        return self.getData("imageY")
+
+    def getThumbnailScale(self):
+        return self.getData("imageScale")
+
+    def getThumbnailOffset(self):
+        return (self.getThumbnailXOffset(), self.getThumbnailYOffset())
 
     def usingPIL(self):
         return self.bUsePIL

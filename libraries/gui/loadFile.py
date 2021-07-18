@@ -63,9 +63,7 @@ class FileLoader(tk.Frame):
         intHeight = self.winfo_height()
         self.updateImage(intHeight)
 
-        print(self.width)
-
-        intWidth = self.width - (intHeight + 10)
+        intWidth = self.width - (intHeight)
 
         self.pEntry.place(anchor = "w", rely = .5, width = intWidth)
         self.pButton.place(x = intWidth, width = intHeight, height = intHeight)
@@ -103,8 +101,24 @@ class FileLoader(tk.Frame):
             except TypeError:
                 pass
 
-            print(self.strFileName)
         return
+
+    def setFile(self, strFilePath):
+        try:
+            pFile = open(strFilePath, "r")
+            self.pFile = pFile
+            self.strFileName = fileName(pFile.name)
+
+            self.pEntryTextVar.set(self.strFileName)
+
+            try:
+                self.pCallFunc(self.pFile.name)
+
+            except TypeError:
+                pass
+        except (FileNotFoundError, TypeError):
+            #Not a file.
+            return
 
     def clearFile(self):
         self.pEntryTextVar.set("")
@@ -114,6 +128,12 @@ class FileLoader(tk.Frame):
 
     def getFile(self):
         return self.pFile
+
+    def getFilePath(self):
+        try:
+            return self.pFile.name
+        except AttributeError:
+            return None
 
     def getFileName(self):
         return self.strFileName

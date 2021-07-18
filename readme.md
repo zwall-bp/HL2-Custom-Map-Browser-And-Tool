@@ -13,11 +13,20 @@
 * [Managing Maps](#managing-maps)
 
 >**Level Designer**
-* [Compiling Your Own Maps (Command Line)](#compiling-your-own-maps-cli)
-    * [Compiling A Single Map](#compiling-a-single-map-cli)
-    * [Compiling A Map Pack](#compiling-a-map-pack-cli)
+* CLI (Command Line)
+* [Compiling Your Own Maps](#compiling-your-own-maps-cli)
+  * [Compiling A Single Map](#compiling-a-single-map-cli)
+  * [Compiling A Map Pack](#compiling-a-map-pack-cli)
 * [Command Line Arguments](#cli-arguments)
-* GUI Tool. (Coming soon!)
+* [GUI](#gui-tool)
+  * [Compiling A Single Map](#compiling-a-single-map-gui)
+  * [Compiling A Map Pack](#compiling-a-map-pack-gui)
+  * [Thumbnail Editing](#thumbnail-editing-gui)
+  * [Entry Prompts](#entry-prompts-gui)
+  * [Saving / Loading](#saving--loading-gui)
+* [Debrief](#debrief)
+
+* [Credits](#credits)
 
 ## What Is This?
 For those who have played a good amount of custom Half-Life 2 maps, you may understand that most level designers have you enter their map through means of the console. While this is the standard, it isn't a user-friendly approach. Some other people try to solve the issue by instead turning their map packs into mods. But, if the player wants to swap to a different map, not made by the developer, they would need to leave the game. That's where this tool comes in to help solve that problem.
@@ -33,7 +42,7 @@ With this browser, level designer are able to:
     * With the compiling tool automatically generating the correct thumbnail specs.
 * Credit themselves with the use of the comments.
 * And the best part, no more needing to see an ugly bsp-friendly name. Add spaces, colons, and other characters to the name of your map!
-* `[NOT YET IMPLEMENTED]` You can even pack your maps into a `.bmz` file for easier installation on the end user's side!
+* ~You can even pack your maps into a `.bmz` file for easier installation on the end user's side!~ Bmz support will not be added as it goes against this project's spirit of modular install/uninstall using `./custom`.
 
 ## Map Packs
 Along with browsing single maps, by creating a subdirectory inside of `./maps` allows you to have a specified *map pack* in which you can give your own name, comment, and thumbnail.
@@ -228,3 +237,98 @@ This is a more verbose explanation of all of the available arguments.
 ```bash
 -o "~/Desktop"
 ```
+
+## GUI Tool
+It's understandable that working on the CLI is a pain for most. With the added confusion with how to set up thumbnails, it's even worse. Because of that, by running the program without any arguments, it will launch directly into the GUI tool.
+
+```bash
+python ./CustomMapCompiler.py
+```
+<img src="./assets/Markdown/tool_startup.png" alt="The custom map tool on startup.">
+
+### Compiling A Single Map (GUI)
+Making maps and setting up thumbnails are a breeze in this interactive editor! To start, go into the menu and select:
+
+> Map -> New Map
+
+<img src="./assets/Markdown/tool_map.png" alt="The custom map tool with a new map tab.">
+
+This will create a tab for a custom map instance. Filling out the data for the custom map is made simple with the given text/file prompts on the right hand side. The thumbnail viewer can be seen on the left hand side. [More information on how to utilize the viewer will be gone over later.](#thumbnail-editing-(gui))
+
+> **NOTE:** The bare minimum needed to export a map is a **Name** and **Map File**. Everything else is optional.
+
+<img src="./assets/Markdown/tool_map_complete.png" alt="A completed map tab, ready to export.">
+
+When you are ready to compile the map simply select the tab of the map you want to export and:
+
+> Map -> Export
+
+<img src="./assets/Markdown/tool_map_exported.png" alt="The completed map project folder.">
+
+If the project already exists, it will ask you if you'd like to delete and overwrite it. After that, you will find the usable map in `./exports`. It's already set up to be a custom folder. So, you can easily add in all the custom assets into the project's folder and place it in `[Game's Directory]/custom/`
+
+### Compiling A Map Pack (GUI)
+Along with the ability to create/export single maps, the GUI tool also allows for the creation and exporting of map packs. To start, in the menu, toggle:
+
+> Pack -> Map Pack
+
+<img src="./assets/Markdown/tool_pack.png" alt="The custom map tool with a new pack tab.">
+
+This will create a tab to the front of the set which will represent the pack's data. Just like with the map tabs, you have text/file prompts which can be filled out to give more details about your map pack.
+
+> **NOTE:** At the very least, a pack needs a **Name**. Everything else is optional.
+
+<img src="./assets/Markdown/tool_pack_complete.png" alt="A completed pack tab, ready to export.">
+
+Once you stylize the pack itself, be sure to also add in all the maps you want inside of the pack in the other tabs. If you want one map to be in front of another map, or vise-versa. Select the map's tab that you want to move and:
+
+> Pack -> Move [Left/Right]
+
+After you feel that everything is in place, it's time to export. Simply select the pack's tab and:
+
+> Pack -> Export
+
+<img src="./assets/Markdown/tool_pack_exported.png" alt="The completed map pack project folder.">
+
+If the project already exists, it will ask you if you'd like to delete and overwrite it. After that, you will find the usable maps and the pack in `./exports`. It's already set up to be a custom folder. So, you can easily add in all the custom assets into the project's folder and place it in `[Game's Directory]/custom/`
+
+### Thumbnail Editing (GUI)
+In order to allow for quick thumbnail creation, the added viewer acts as an editor as well. You can:
+* Drag the image to pan.
+* Scroll with the mouse to zoom / unzoom.
+
+<img src="./assets/Markdown/tool_thumbnail_viewer.png" alt="The thumbnail viewer in action, with a panned and zoomed in screenshot.">
+
+### Entry Prompts (GUI)
+There are three different types of entry fields in the editor.
+#### Text Entry
+Allows you to input in text. Pretty self explanatory.
+#### File Entry
+Requires a specific file. By clicking on the folder icon, it will bring up the file browser. Clicking on the entry field, itself, will clear that entry.
+#### Checkbox
+This is only used to dictate if the map/pack should be locked. [Please stop by the Wiki to understand how this feature works.](https://developer.valvesoftware.com/wiki/Point_bonusmaps_accessor).
+
+<img src="./assets/Markdown/tool_prompts.png" alt="A screenshot of the different types of prompts in the editor.">
+
+### Saving / Loading (GUI)
+If you'd like to get back to work on a project, instead of exporting, you can save. What differs this from the conventional export is all of the data is saved into a `.json` file, and the files inputted only reference the path to where they originate.
+
+You can save a map / pack by selecting the tab you want to save and:
+
+> [Map / Pack] -> Save [Map / Pack]
+
+#### Loading A Map
+When loading a map, it will iterate over all maps in the given `.json` file and append each one to a new tab.
+
+#### Loading A Pack
+Be careful when loading a pack as it will clear all tabs and replace it with the data inside of the given `.json`.
+
+## Debrief
+With all that being said, you should be equipped to add or port all of your maps to this amazing browser! While it's a little late to the party, I do hope this becomes a standard tool for any HL2 level developer in order to help allow their maps to stand out and give the players an easier way to browse their own collection.
+
+## Credits
+**Zach Wallace (BP)** - Practically the entire program.
+
+**Mark James** - [Folder Icon](http://www.famfamfam.com/lab/icons/silk/)
+
+**Valve Developer Wiki Community** - Amazing documenting of the game

@@ -26,6 +26,11 @@ class GameMap(BonusInstance):
         if bInPack:
             self.setData("packed", True)
 
+    #Override
+    def validateExport(self):
+        #Also check to see if we have a map.
+        return super().validateExport() and self.getMap()
+
     #Flag this map as in a pack.
     def enablePack(self):
         self.setData("packed", True)
