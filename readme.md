@@ -11,6 +11,7 @@
 * [Uninstalling The Browser](#uninstalling-the-browser)
 * [Installing Maps](#installing-maps)
 * [Managing Maps](#managing-maps)
+* [Overwriting Error](#overwriting-error)
 
 >**Level Designer**
 * CLI (Command Line)
@@ -24,6 +25,7 @@
   * [Thumbnail Editing](#thumbnail-editing-gui)
   * [Entry Prompts](#entry-prompts-gui)
   * [Saving / Loading](#saving--loading-gui)
+* [Overwriting Existing Assets](#overwriting-existing-assets)
 * [Debrief](#debrief)
 
 * [Credits](#credits)
@@ -66,6 +68,8 @@ Next time you boot up your game you will see a new menu option:
 
 > **WARNING:** For users playing in a language other than English, you will be missing localization! To fix this, check out `./custom-map-explorer/resource/gameui_english.txt` to see what keyvals you will need to change for your own language.
 
+> **WARNING:** Some custom maps/packs may overwrite `./cfg/game.cfg` and `./cfg/modsettings.cfg` in order to allow for warning you about the given pack's other overwriting warnings.
+
 ## Uninstalling The Browser
 Deleting the browser is just as easy as installing. Just:
 1. Delete `[Steam Directory]/common/Half-Life 2/hl2/custom/custom-map-explorer`
@@ -87,12 +91,24 @@ With the power of the Source Engine's `custom/` directory, for overwriting and a
 
 <img src="./assets/Markdown/hl2_custom_dir.png" alt="My custom/ directory with a bunch of maps">
 
+> **TIP:** In order to allow you to quickly disable addons without uninstalling, add in a `./custom/disable` directory and cut/paste the addons into there.
+
+## Overwriting Error
+Are you getting this pop-up whenever you start your game?
+<img src="./assets/Markdown/custom_warning.png" alt="An in-game screenshot of the overwrite warning.">
+
+Don't worry, that's apart of this browser! Sometimes, due to the way Source works, level developers may need to overwrite important files that other maps rely on, to let the level developers do more complex scenes in their own maps. In order to work out all edge cases that may appear for this browser, this pop-up was added to give you a warning.
+
+While the problem may be benign most of the time, it's recommended to [disable](#managing-maps) or delete the addon after you have finished playing with it.
+
 ## Compiling Your Own Maps (CLI)
 Alright, now for the fun part. Level designers, you wanna use this tool to spice up your presentation? I know you do. :)
 
+Before we start, I'd like to tell any and all of you ambitious level designer to ***NEVER USE CAPITAL LETTERS IN DIRECTORIES OR FILES!*** While everything looks fine on Windows, UNIX systems, where files are CaSE senSitive will make these directories completely unreadable.
+
 To get started, this tool hasn't been *frozen* yet, so **you will need to install [Python](https://www.python.org/downloads/)** in order to run the program. Python was chosen as I am on a Linux, and would like for this tool to be as portable as possible.
 
-> WARNING: You will need to install PIL in order to run the program. To install this Python Package, simply:
+> **WARNING:** You will need to install PIL in order to run the program. To install this Python Package, simply:
 ```bash
 python -m pip install pillow
 ```
@@ -327,6 +343,19 @@ When loading a map, it will iterate over all maps in the given `.json` file and 
 
 #### Loading A Pack
 Be careful when loading a pack as it will clear all tabs and replace it with the data inside of the given `.json`.
+
+## Overwriting Existing Assets
+It's understandable that sometimes, you can't get your map to work properly without overwriting existing assets. For example, any `.VCD` files made in the Faceposer must be compiled into a single `scenes.image` file, shared by all .vcd's and only loaded at startup.
+
+We do not want to change these files behind our end user's back, or else they may experience difficulties in the vanilla maps or some other custom map. Because of this, the map tool also comes with the needed files to warn our user.
+<img src="./assets/Markdown/custom_warning.png" alt="An in-game screenshot of the overwrite warning.">
+
+### Adding in the warning
+To add this pop-up to your own pack, copy and paste the contents inside of `./overwrite-error` inside of your addon.
+
+Next, go into `./[YOUR PACK]/resource/gameui_english.txt` in your favorite text editor and change the square brackets `[]` to whatever should go there.
+
+The warning should now show up in game!
 
 ## Debrief
 With all that being said, you should be equipped to add or port all of your maps to this amazing browser! While it's a little late to the party, I do hope this becomes a standard tool for any HL2 level developer in order to help allow their maps to stand out and give the players an easier way to browse their own collection.
