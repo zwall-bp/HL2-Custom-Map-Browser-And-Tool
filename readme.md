@@ -95,6 +95,7 @@ With the power of the Source Engine's `custom/` directory, for overwriting and a
 
 ## Overwriting Error
 Are you getting this pop-up whenever you start your game?
+
 <img src="./assets/Markdown/custom_warning.png" alt="An in-game screenshot of the overwrite warning.">
 
 Don't worry, that's apart of this browser! Sometimes, due to the way Source works, level developers may need to overwrite important files that other maps rely on, to let the level developers do more complex scenes in their own maps. In order to work out all edge cases that may appear for this browser, this pop-up was added to give you a warning.
@@ -347,6 +348,7 @@ Be careful when loading a pack as it will clear all tabs and replace it with the
 It's understandable that sometimes, you can't get your map to work properly without overwriting existing assets. For example, any `.VCD` files made in the Faceposer must be compiled into a single `scenes.image` file, shared by all .vcd's and only loaded at startup.
 
 We do not want to change these files behind our end user's back, or else they may experience difficulties in the vanilla maps or some other custom map. Because of this, the map tool also comes with the needed files to warn our user.
+
 <img src="./assets/Markdown/custom_warning.png" alt="An in-game screenshot of the overwrite warning.">
 
 ### Adding in the warning
