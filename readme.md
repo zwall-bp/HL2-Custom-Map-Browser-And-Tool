@@ -185,7 +185,6 @@ That's all! You are now prepared to make your own maps and map packs for this br
 This is a more verbose explanation of all of the available arguments.
 
 ### -g --gui (GUI Editor)
-> ***WARNING:*** This tool isn't complete. Single pack works fine (hangs when you attempt to overwrite an existing folder. Check console for extra instrucitons.), but map pack hasn't been implemented.
 
 * A more user friendly way of compiling custom maps and packs for the browser.
 * It also allows for a much easier means of creating thumbnails.
