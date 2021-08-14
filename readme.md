@@ -11,11 +11,13 @@
 * [Uninstalling The Browser](#uninstalling-the-browser)
 * [Installing Maps](#installing-maps)
 * [Managing Maps](#managing-maps)
+* [Installing Custom Backgrounds](#installing-custom-backgrounds)
+* [Removing Custom Backgrounds](#removing-custom-backgrounds)
 * [Overwriting Error](#overwriting-error)
 
 >**Level Designer**
-* CLI (Command Line)
 * [Compiling Your Own Maps](#compiling-your-own-maps-cli)
+* [CLI (Command Line)](#cli-command-line)
   * [Compiling A Single Map](#compiling-a-single-map-cli)
   * [Compiling A Map Pack](#compiling-a-map-pack-cli)
 * [Command Line Arguments](#cli-arguments)
@@ -25,6 +27,7 @@
   * [Thumbnail Editing](#thumbnail-editing-gui)
   * [Entry Prompts](#entry-prompts-gui)
   * [Saving / Loading](#saving--loading-gui)
+* [Custom Backgrounds](#custom-backgrounds)
 * [Overwriting Existing Assets](#overwriting-existing-assets)
 * [Debrief](#debrief)
 
@@ -93,6 +96,24 @@ With the power of the Source Engine's `custom/` directory, for overwriting and a
 
 > **TIP:** In order to allow you to quickly disable addons without uninstalling, add in a `./custom/disable` directory and cut/paste the addons into there.
 
+## Installing Custom Backgrounds
+If you ever browse into your addon and you see a script called `AddCustomBackground`, you're in for a good time!
+
+<img src="./assets/Markdown/hl2_background_script.png" alt="An example of the background script in an addon.">
+
+The level developer was nice enough to create a background map which you can add to your own rotation of startup menu maps.
+
+> **WARNING:** While I have provided a bash script that is completely safe to run, always be cautious about running any scripts on your machine that you don't fully trust, *ESPECIALLY IF YOU ARE RUNNING AT A HIGHER PRIVLAGE!*
+
+## Removing Custom Backgrounds
+In the case where you want to remove the custom backgrounds, you have two different options:
+
+#### 1. Delete `./custom/custom-backgrounds`
+This is the more simpler option.
+
+#### 2. Run `./custom/custom-backgrounds/ResetBackgrounds.sh`
+Practically the same as the previous option, but this will at least preserve the addon.
+
 ## Overwriting Error
 Are you getting this pop-up whenever you start your game?
 
@@ -102,7 +123,7 @@ Don't worry, that's apart of this browser! Sometimes, due to the way Source work
 
 While the problem may be benign most of the time, it's recommended to [disable](#managing-maps) or delete the addon after you have finished playing with it.
 
-## Compiling Your Own Maps (CLI)
+## Compiling Your Own Maps
 Alright, now for the fun part. Level designers, you wanna use this tool to spice up your presentation? I know you do. :)
 
 Before we start, I'd like to tell any and all of you ambitious level designer to ***NEVER USE CAPITAL LETTERS IN DIRECTORIES OR FILES!*** While everything looks fine on Windows, UNIX systems, where files are CaSE senSitive will make these directories completely unreadable.
@@ -118,6 +139,9 @@ To check out all arguments available, open a terminal in this directory and run 
 ```bash
 python ./CustomMapCompiler.py --help
 ```
+
+### CLI (Command Line)
+For all you independent, empowered terminal nerds who don't need no GUI, you can still use this tool through arguments. The procedure compared to the GUI is different when it comes to creating packs, but it's still possible through the use of the [`-json`](j-json-export-to-json) argument.
 
 ### Compiling A Single Map (CLI)
 All single maps require at the very least a:
@@ -344,6 +368,21 @@ When loading a map, it will iterate over all maps in the given `.json` file and 
 #### Loading A Pack
 Be careful when loading a pack as it will clear all tabs and replace it with the data inside of the given `.json`.
 
+## Custom Backgrounds
+If you are an ambitious level developer who wants to go above and beyond the call of duty when publishing your work, you have the ability to add in a custom background map to the end user's start menu rotation.
+
+<img src="./assets/Markdown/hl2_menu_custom.png" alt="An in-game screenshot of a custom background map. Originally used in RTSL's VerticalVille">
+
+Place your background map and background materials in their respective directories.
+
+After, copy and paste the provided script `./addon-tools/custom-background/AddCustomBackground.sh` into your addon's root directory.
+
+Finish up by opening up the file and putting in all the names of the background maps inside of **line 11**. Each within their own string.
+
+<img src="./assets/Markdown/tool_background_script.png" alt="An example screenshot from within AddCustomBackground.sh">
+
+Run the script at least once while it's inside the `./custom` directory to check and see if everything works correctly. If a new addon, `custom-backgrounds`, appears everything should be good.
+
 ## Overwriting Existing Assets
 It's understandable that sometimes, you can't get your map to work properly without overwriting existing assets. For example, any `.VCD` files made in the Faceposer must be compiled into a single `scenes.image` file, shared by all .vcd's and only loaded at startup.
 
@@ -352,9 +391,11 @@ We do not want to change these files behind our end user's back, or else they ma
 <img src="./assets/Markdown/custom_warning.png" alt="An in-game screenshot of the overwrite warning.">
 
 ### Adding in the warning
-To add this pop-up to your own pack, copy and paste the contents inside of `./overwrite-error` inside of your addon.
+To add this pop-up to your own pack, copy and paste the contents inside of `./addon-tools/overwrite-error` inside of your addon.
 
 Next, go into `./[YOUR PACK]/resource/gameui_english.txt` in your favorite text editor and change the square brackets `[]` to whatever should go there.
+
+> **WARNING:** Be sure the localization file is encoded in **UTF-16LE**, not UTF-8 or ASCII.
 
 The warning should now show up in game!
 
