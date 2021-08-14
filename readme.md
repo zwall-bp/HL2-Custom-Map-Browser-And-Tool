@@ -101,7 +101,9 @@ If you ever browse into your addon and you see a script called `AddCustomBackgro
 
 <img src="./assets/Markdown/hl2_background_script.png" alt="An example of the background script in an addon.">
 
-The level developer was nice enough to create a background map which you can add to your own rotation of startup menu maps.
+The level developer was nice enough to create a background map which you can add to your own rotation of startup menu maps. Just run the script.
+
+> **TIP:** After you finish, the next time you boot up the game, be sure to run the command `sv_unlockedchapters 99` to expand the background map pool. This will unlock all of the chapters in New Game.
 
 > **WARNING:** While I have provided a bash script that is completely safe to run, always be cautious about running any scripts on your machine that you don't fully trust, *ESPECIALLY IF YOU ARE RUNNING AT A HIGHER PRIVLAGE!*
 
