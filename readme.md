@@ -141,7 +141,7 @@ python ./CustomMapCompiler.py --help
 ```
 
 ### CLI (Command Line)
-For all you independent, empowered terminal nerds who don't need no GUI, you can still use this tool through arguments. The procedure compared to the GUI is different when it comes to creating packs, but it's still possible through the use of the [`-json`](j-json-export-to-json) argument.
+For all you independent, empowered terminal nerds who don't need no GUI, you can still use this tool through arguments. The procedure compared to the GUI is different when it comes to creating packs, but it's still possible through the use of the [`-json`](-j---json-export-to-json) argument.
 
 ### Compiling A Single Map (CLI)
 All single maps require at the very least a:
