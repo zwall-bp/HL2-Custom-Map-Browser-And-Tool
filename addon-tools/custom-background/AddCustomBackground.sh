@@ -58,9 +58,10 @@ EP2_DEFAULT_BG="\"chapters\"
 	7	\"ep2_background03\"
 }"
 
+cd "$(dirname "$0")"
+
 ADDON_NAME="$(basename "$(pwd)")"
 ADDON_PATH="$(pwd)"
-SCRIPT_PATH="$(realpath "$0")"
 
 #########################################################
 #Functions
