@@ -174,6 +174,9 @@ def GetCleanName(strName: str):
         #If it's a space, we instead convert it to a hyphen for readability.
         elif char == " ":
             strNewName = strNewName + "-"
+        #Also allow for numbers.
+        elif char.isdigit():
+            strNewName = strNewName + char
     #Finished looping though all characters.
     #Check to make sure we got something by the end.
     if strNewName == "":
