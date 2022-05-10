@@ -405,7 +405,7 @@ The warning should now show up in game!
 With all that being said, you should be equipped to add or port all of your maps to this amazing browser! While it's a little late to the party, I do hope this becomes a standard tool for any HL2 level developer in order to help allow their maps to stand out and give the players an easier way to browse their own collection.
 
 ## Credits
-**Zach Wallace (BP)** - Practically the entire program.
+**BP** - Practically the entire program.
 
 **Mark James** - [Folder Icon](http://www.famfamfam.com/lab/icons/silk/)
 
